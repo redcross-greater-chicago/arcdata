@@ -28,13 +28,6 @@ GIT
       polyamorous (~> 0.6.0)
 
 GIT
-  remote: git://github.com/geokit/geokit.git
-  revision: f17f397dd32685158e361730a17fead28416f1ee
-  specs:
-    geokit (1.6.5)
-      multi_json (>= 1.3.2)
-
-GIT
   remote: git://github.com/jlaxson/active_admin.git
   revision: 7c9f172db4850cc43a55b68ff66fc413b21065fa
   branch: rails4
@@ -186,6 +179,8 @@ GEM
     ffi (1.9.0)
     formtastic-bootstrap (2.1.3)
       formtastic (~> 2.2)
+    geokit (1.6.5)
+      multi_json
     haml (4.0.3)
       tilt
     haml-rails (0.4)
@@ -329,6 +324,8 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
+    simplecov-rcov (0.2.3)
+      simplecov (>= 0.4.1)
     spreadsheet (0.8.5)
       ruby-ole (>= 1.0)
     sprockets (2.10.0)
@@ -397,7 +394,7 @@ DEPENDENCIES
   faker
   formtastic!
   formtastic-bootstrap
-  geokit!
+  geokit
   haml-rails
   has_scope
   inherited_resources
@@ -424,6 +421,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-raven
   shoulda-matchers
+  simplecov-rcov
   spreadsheet
   sqlite3
   squeel!
