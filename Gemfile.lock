@@ -324,8 +324,6 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
-    simplecov-rcov (0.2.3)
-      simplecov (>= 0.4.1)
     spreadsheet (0.8.5)
       ruby-ole (>= 1.0)
     sprockets (2.10.0)
@@ -421,7 +419,6 @@ DEPENDENCIES
   selenium-webdriver
   sentry-raven
   shoulda-matchers
-  simplecov-rcov
   spreadsheet
   sqlite3
   squeel!
