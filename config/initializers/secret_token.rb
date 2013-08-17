@@ -9,4 +9,23 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Scheduler::Application.config.secret_key_base = Rails.env.production? ? ENV['RAILS_SECRET_KEY'] : '8f2bbc36c698298224963ef68cec4a731c9408f438ff86a55f0d649aaa965e29363d03a97c1d4ac098f2ddf261b4db36ba36d3457f29c20217fc688278f35e48'
+
+# NOTE: Added randomly generated secret key as per the recomendations for
+# Heroku Ruby on Rails apps outlined here http://ruby.railstutorial.org/chapters/static-pages
+require 'securerandom'
+
+def secure_token
+    token_file = Rails.root.join('.secret')
+    if File.exist?(token_file)
+       # Use the existing token.
+       File.read(token_file).chomp
+    else
+       # Generate a new token and store it in token_file.
+       token = SecureRandom.hex(64)
+       File.write(token_file, token)
+       token
+    end
+end
+
+Scheduler::Application.config.secret_key_base = secure_token
+# Scheduler::Application.config.secret_key_base = Rails.env.production? ? ENV['RAILS_SECRET_KEY'] : '8f2bbc36c698298224963ef68cec4a731c9408f438ff86a55f0d649aaa965e29363d03a97c1d4ac098f2ddf261b4db36ba36d3457f29c20217fc688278f35e48'
