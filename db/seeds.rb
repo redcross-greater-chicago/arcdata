@@ -67,3 +67,18 @@ Scheduler::Shift.create county: sf, name: 'Health Services', abbrev: 'DHS', posi
 #me.email = 'jlaxson@mac.com'
 #me.password = 'test123'
 #me.save!
+
+# Seed data for Chicago chapter
+# ---------------------FAKE DATA ADDED BY NHU
+chap = Roster::Chapter.create name: 'Chicago', time_zone_raw: 'Central Time (US & Canada)'
+county = Roster::County.create name: 'Cook', chapter: chap
+role = Roster::Role.create name: 'admin', grant_name: 'incidents_admin',
+chapter_id: 1
+pos = Roster::Position.create name: 'admin', watchfire_role: 'yes', abbrev:
+'admin', chapter_id: 1
+person = Roster::Person.create chapter_id: 2, primary_county_id:1, first_name:
+"Clara", last_name: "Barton", username: "admin", password: "admin", home_phone:
+"1112223333", cell_phone: "1112223333", work_phone: "1112223333", address1:
+"10 10th St", city: "Chicago", state: "IL", zip: "60660"
+
+ActiveRecord::Base.connection.execute("SELECT * FROM roster_people") 
