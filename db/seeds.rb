@@ -93,6 +93,10 @@ Roster::CountyMembership.create person: chuck, county: cook_county
 Roster::CountyMembership.create person: chuck, county: adams_county
 Roster::PositionMembership.create position:dat_admin_position, person: chuck
 Roster::PositionMembership.create position:dat_dispatcher, person: chuck
+
+incident = Incidents::Incident.create chapter:chicago_chapter, county:cook_county, incident_number:"14-123", incident_type:"fire", cas_incident_number:"32123", incident_description:"House fire in 10 unit apartment", address:"home", city:"chicago", state:"IL", num_adults:2, num_children:3, num_families:1, num_cases:1, narrative_brief:"foo", narrative:"bar", neighborhood:"Lakeview", date:Date.new
+
+Incidents::ResponderAssignment.create person:chuck, incident:incident, role:"baller", respones:"fire"
 # pos = Roster::Position.create name: 'admin', watchfire_role: 'yes', abbrev:
 # 'admin', chapter_id: 1
 # person = Roster::Person.create chapter_id: 2, primary_county_id:1, first_name:
