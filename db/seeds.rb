@@ -95,7 +95,23 @@ Roster::PositionMembership.create position:dat_admin_position, person: chuck
 Roster::PositionMembership.create position:dat_dispatcher, person: chuck
 incident = Incidents::Incident.create chapter:chicago_chapter, county:cook_county, incident_number:"14-123", incident_type:"fire", cas_incident_number:"32123", incident_description:"House fire in 10 unit apartment", address:"home", city:"chicago", state:"IL", num_adults:2, num_children:3, num_families:1, num_cases:1, narrative_brief:"foo", narrative:"bar", neighborhood:"Lakeview", date:Date.new
 
-Incidents::ResponderAssignment.create person:chuck, incident:incident, role:"baller", respones:"fire"
+Incidents::ResponderAssignment.create person:chuck, incident:incident, role:"baller", response:"fire"
+
+day = Scheduler::ShiftGroup.create chapter: chicago_chapter, name: 'Day', start_offset: 25200, end_offset: 68400, period: 'daily'
+night = Scheduler::ShiftGroup.create chapter: chicago_chapter, name: 'Night', start_offset: 68400, end_offset: 111600, period: 'daily'
+week = Scheduler::ShiftGroup.create chapter: chicago_chapter, name: 'Weekly', start_offset: 0, end_offset: 7.days, period: 'weekly'
+month = Scheduler::ShiftGroup.create chapter: chicago_chapter, name: 'Monthly', start_offset: 0, end_offset: 31, period: 'monthly'
+
+[day, night].each do |group|
+  [cook_county, adams_county, alexander_county, dupage_county].each do |county|
+    Scheduler::Shift.create county: county, name: 'Team Lead', abbrev: 'TL', positions: [dat_team_lead], shift_group: group, ordinal: 1, max_signups: 1, spreadsheet_ordinal: 1, dispatch_role: 1, min_desired_signups:1
+    Scheduler::Shift.create county: county, name: 'Backup Lead', abbrev: 'BTL', positions: [dat_team_lead], shift_group: group, ordinal: 2, max_signups: 1, spreadsheet_ordinal: 2, dispatch_role: 2, min_desired_signups:1
+    if county == cook_county
+      Scheduler::Shift.create county: county, name: 'Dispatch', abbrev: 'Disp', positions: [dat_dispatcher], shift_group: group, ordinal: 5, max_signups: 1, spreadsheet_ordinal: 3, min_desired_signups:1
+    end
+  end
+end
+
 # pos = Roster::Position.create name: 'admin', watchfire_role: 'yes', abbrev:
 # 'admin', chapter_id: 1
 # person = Roster::Person.create chapter_id: 2, primary_county_id:1, first_name:
