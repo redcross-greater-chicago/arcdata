@@ -23,3 +23,6 @@
 config/database.yml
 coverage/
 sauce_connect.log*
+
+.rvmrc
+.secret
