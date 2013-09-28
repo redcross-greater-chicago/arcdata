@@ -88,11 +88,16 @@ dat_trainee = Roster::Position.create name:'DAT Trainee', vc_regex_raw:'Trainee$
 dat_dispatcher = Roster::Position.create name:'DAT Dispatcher', vc_regex_raw:'Dispatch$', chapter:chicago_chapter, roles:[cas_admin]
 
 chuck = Roster::Person.create chapter:chicago_chapter, primary_county:cook_county, first_name:'Charles', last_name:'Chong', username:'chuck', password:'chuck', cell_phone:'3125061270', address1:'604 W Sheridan Rd', city:'Chicago', state:'IL', zip:'60613'
+bob = Roster::Person.create chapter:chicago_chapter, primary_county:cook_county, first_name:'Bob', last_name:'Fischer', username:'bob', password:'bob', cell_phone:'3125061270', address1:'604 W North Ave', city:'Chicago', state:'IL', zip:'60614'
 
 Roster::CountyMembership.create person: chuck, county: cook_county
 Roster::CountyMembership.create person: chuck, county: adams_county
 Roster::PositionMembership.create position:dat_admin_position, person: chuck
 Roster::PositionMembership.create position:dat_dispatcher, person: chuck
+Roster::CountyMembership.create person: bob, county: cook_county
+Roster::PositionMembership.create position:dat_team_lead, person: bob
+
+
 incident = Incidents::Incident.create chapter:chicago_chapter, county:cook_county, incident_number:"14-123", incident_type:"fire", cas_incident_number:"32123", incident_description:"House fire in 10 unit apartment", address:"home", city:"chicago", state:"IL", num_adults:2, num_children:3, num_families:1, num_cases:1, narrative_brief:"foo", narrative:"bar", neighborhood:"Lakeview", date:Date.new
 
 Incidents::ResponderAssignment.create person:chuck, incident:incident, role:"baller", response:"fire"
